@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Transaction : MonoBehaviour
+public class Transaction
 {
     public string FromAddress { get; set; }
     public string ToAddress { get; set; }

@@ -13,12 +13,14 @@ public class Server : MonoBehaviour, IServer
     public event Action DataEvent;
     
     public event Action PlayerMove;
+    
+    public event Action<Peca> PecaEvent;
 
     public event Action PlayRequest;
 
     public event Action Syncronizantion;
 
-    public event Action<DominoPecas, int, NodeInfo> StartPlay;
+    //public event Action<DominoPecas, int, NodeInfo> StartPlay;
 
     public event Action<int> DisconnectEvent;
 
@@ -148,8 +150,19 @@ public class Server : MonoBehaviour, IServer
                 PlayRequest?.Invoke();
                 break;
             case DataEvents.PlayerMove: // call event to deal with this event and every gameplay script who sould know about network info should do your action
-                GlobalConfigInfo.blockchain.CreateTransaction(GlobalConfigInfo.CurrentAdversary.connectedNode.nickName, GlobalConfigInfo.ThisNode.nickName, message);
-                PlayerMove?.Invoke();
+                try
+                {
+                    Peca peca = JsonConvert.DeserializeObject<Peca>(message.Message.ToString());
+                    GlobalConfigInfo.blockchain.CreateTransaction(GlobalConfigInfo.CurrentAdversary.connectedNode.nickName, GlobalConfigInfo.ThisNode.nickName, peca);
+                    PecaEvent?.Invoke(peca);
+                }
+                catch (Exception e)
+                {
+                    string exc = e.ToString();
+                }
+
+                //PlayerMove?.Invoke();
+
                 break;
         }
 

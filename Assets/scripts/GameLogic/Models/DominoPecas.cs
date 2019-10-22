@@ -1,18 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DominoPecas : MonoBehaviour
+[Serializable]
+public class DominoPecas
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Peca> playerAPecas = new List<Peca>(7);
+    public List<Peca> playerBPecas = new List<Peca>(7);
+    public List<Peca> pecasParaComprar = new List<Peca>(13);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Peca pecaInicial;
 }

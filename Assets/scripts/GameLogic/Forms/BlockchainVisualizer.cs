@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class BlockchainVisualizer : MonoBehaviour
 {
-    public Text blockchainText;
+    public GameObject blockViewModelPrefab;
 
-    // Start is called before the first frame update
     void Start()
     {
-        BlockchainExportImporter.RetrieveBlockFromBlockchain();
+        GlobalConfigInfo.blockchain.BlockchainSizeChanged += AddBlocksToUI;
+        AddBlocksToUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    void AddBlocksToUI()
     {
-        
+        foreach (Block b in GlobalConfigInfo.blockchain.Chain)
+        {
+            GameObject instance = Instantiate(blockViewModelPrefab);
+            instance.GetComponent<BlockViewModel>().block = b;
+            instance.GetComponent<BlockViewModel>().StartViewModel();
+        }
     }
 }

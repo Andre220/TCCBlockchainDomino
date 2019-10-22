@@ -8,7 +8,7 @@ using UnityEngine;
 
 //Lembre-se: Os blocos são um conjunto de transações
 //Esse script é responsável também pela mineração
-public class Block : MonoBehaviour
+public class Block
 {
     public int Index { get; set; }
     public DateTime TimeStamp { get; set; }

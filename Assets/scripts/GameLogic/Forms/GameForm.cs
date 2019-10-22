@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class GameForm : MonoBehaviour
 {
-    public List<GameObject> forms;
+    public List<GameObject> FormsToDisable;
+    public List<GameObject> FormsToEnable;
 
-    public List<GameObject> Buttons;
+    public List<GameObject> Buttons;//Vai se tornar as pecas do player
 
-    public GameObject Panel; 
     public Text MovesCount;
-    public Text TransactionPoolData;
+
+    public GameObject TransactionPrefab;
 
     public Camera mainCamera;
     public Color PlayingBackgroundColor;
@@ -19,7 +20,8 @@ public class GameForm : MonoBehaviour
     void Start()
     {
         GlobalConfigInfo.nodeServer.ConnectEvent += SetupGamePlay;
-        GlobalConfigInfo.nodeServer.PlayerMove += gameDataReceived;
+        //GlobalConfigInfo.nodeServer.PlayerMove += gameDataReceived;
+        GlobalConfigInfo.nodeServer.PecaEvent += pecaReceived;
     }
 
     void SetupGamePlay(ConnectionInfo ci)
@@ -31,14 +33,17 @@ public class GameForm : MonoBehaviour
         print("Port: " + GlobalConfigInfo.CurrentAdversary.connectedNode.port);
         print("Nickname: " + GlobalConfigInfo.CurrentAdversary.connectedNode.nickName);
 
-        foreach (GameObject g in forms)
+        foreach (GameObject g in FormsToDisable)
         {
             g.SetActive(false);
         }
 
-        TransactionPoolData.gameObject?.SetActive(true);
-        MovesCount.gameObject?.SetActive(true);
-        Panel.SetActive(true);
+        foreach (GameObject g in FormsToEnable)
+        {
+            g.SetActive(true);
+        }
+
+        //MovesCount.gameObject?.SetActive(true);
 
         SetupScene();
         SetupPlayingIdentifier();
@@ -77,12 +82,17 @@ public class GameForm : MonoBehaviour
         GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
     }
 
+    public void SendPeca(Peca peca)
+    {
+        NetworkMessage message = new NetworkMessage(DataEvents.PlayerMove, peca);
+
+        GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
+    }
+
     public void SendCountMove()
     {
         if (GlobalConfigInfo.currentPlayerTurn == GlobalConfigInfo.playingIdentifier)
         {
-            TransactionPoolData.text = "";
-
             GlobalConfigInfo.movesCount += 1;
 
             MovesCount.text = GlobalConfigInfo.movesCount.ToString();
@@ -93,9 +103,11 @@ public class GameForm : MonoBehaviour
             
             GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
 
-            foreach (Transaction transaction in GlobalConfigInfo.blockchain.TransactionPool)
+            if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0)
             {
-                TransactionPoolData.text += $"From: {transaction.FromAddress}| To: {transaction.ToAddress}| Data: {transaction.Data}";
+                GameObject instance = Instantiate(TransactionPrefab);
+                instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
+                instance.GetComponent<TransactionViewModel>().StartViewModel();
             }
         }
         else
@@ -104,7 +116,35 @@ public class GameForm : MonoBehaviour
         }
     }
 
-    void gameDataReceived()
+    //void gameDataReceived()
+    //{
+    //    GlobalConfigInfo.movesCount += 1;
+
+    //    MovesCount.text = GlobalConfigInfo.movesCount.ToString();
+
+    //    GlobalConfigInfo.currentPlayerTurn = GlobalConfigInfo.playingIdentifier;
+
+    //    if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0)
+    //    {
+    //        GameObject instance = Instantiate(TransactionPrefab);
+    //        instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
+    //        instance.GetComponent<TransactionViewModel>().StartViewModel();
+    //    }
+
+    //    //TransactionPoolData.text = "";
+
+    //    //foreach (Transaction transaction in GlobalConfigInfo.blockchain.TransactionPool)
+    //    //{
+    //    //    GameObject instance = Instantiate(TransactionPrefab);
+    //    //    instance.GetComponent<TransactionViewModel>().transaction = transaction;
+    //    //    instance.GetComponent<TransactionViewModel>().StartViewModel();
+    //    //    //TransactionPoolData.text += $"From: {transaction.FromAddress}| To: {transaction.ToAddress}| Data: {transaction.Data}";
+    //    //}
+
+    //    Debug.Log("Moves count: " + GlobalConfigInfo.movesCount);
+    //}
+
+    void pecaReceived(Peca peca)
     {
         GlobalConfigInfo.movesCount += 1;
 
@@ -112,13 +152,16 @@ public class GameForm : MonoBehaviour
 
         GlobalConfigInfo.currentPlayerTurn = GlobalConfigInfo.playingIdentifier;
 
-        TransactionPoolData.text = "";
-
-        foreach (Transaction transaction in GlobalConfigInfo.blockchain.TransactionPool)
+        if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0)
         {
-            TransactionPoolData.text += $"From: {transaction.FromAddress}| To: {transaction.ToAddress}| Data: {transaction.Data}";
+            GameObject instance = Instantiate(TransactionPrefab);
+            instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
+            instance.GetComponent<TransactionViewModel>().StartViewModel();
         }
 
+        //Process the UI
+
         Debug.Log("Moves count: " + GlobalConfigInfo.movesCount);
+        Debug.Log($"A : {peca.ValorA} | B : {peca.ValorB}");
     }
 }

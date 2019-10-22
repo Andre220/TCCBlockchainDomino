@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E61FB790-3FC7-D5D8-B2BB-BACB30FB3F1D}</ProjectGuid>
+    <ProjectGuid>{8BB09AEC-A415-4386-D5A1-84DB9FA9B31D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -79,6 +79,9 @@
     <Compile Include="Assets\scripts\GameLogic\Forms\UIHelpers.cs" />
     <Compile Include="Assets\scripts\GameLogic\Models\DominoPecas.cs" />
     <Compile Include="Assets\scripts\GameLogic\Models\Peca.cs" />
+    <Compile Include="Assets\scripts\GameLogic\ViewModels\BlockViewModel.cs" />
+    <Compile Include="Assets\scripts\GameLogic\ViewModels\PecaViewModel.cs" />
+    <Compile Include="Assets\scripts\GameLogic\ViewModels\TransactionViewModel.cs" />
     <Compile Include="Assets\scripts\GlobalConfigInfo.cs" />
     <Compile Include="Assets\scripts\Networking\Client.cs" />
     <Compile Include="Assets\scripts\Networking\Interfaces\IClient.cs" />
@@ -87,45 +90,46 @@
     <Compile Include="Assets\scripts\Networking\Models\NetworkMessage.cs" />
     <Compile Include="Assets\scripts\Networking\Models\NodeInfo.cs" />
     <Compile Include="Assets\scripts\Networking\Server.cs" />
+    <None Include="Assets\Resources\blockchainJson.txt" />
     <None Include="Assets\JsonDotNet\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -311,16 +315,16 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

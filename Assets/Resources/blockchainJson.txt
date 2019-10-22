@@ -1,0 +1,1 @@
+[{"Index":0,"TimeStamp":"2019-10-17T23:22:00.8361852-03:00","PreviousBlockHash":null,"BlockHash":"I84kbqtKVleY0zpz+EHN+lVAt4ZpBILyT3aT6FJoJBs=","Transactions":[],"nonce":0}]

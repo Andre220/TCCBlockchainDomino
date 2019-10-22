@@ -9,9 +9,10 @@ public interface IServer
     event Action<ConnectionInfo> ConnectEvent;
     event Action DataEvent;
     event Action PlayerMove;
+    event Action<Peca> PecaEvent;
     event Action PlayRequest;
     event Action Syncronizantion;
-    event Action<DominoPecas, int, NodeInfo> StartPlay;
+    //event Action<DominoPecas, int, NodeInfo> StartPlay;
     event Action<int> DisconnectEvent;
 
     void OnConnectEvent(int socketID, int connectionId, NetworkError error);

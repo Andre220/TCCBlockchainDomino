@@ -19,7 +19,6 @@ public class Blockchain : MonoBehaviour
     {
         InitializeChain();
         //Find ou if the machine have a copy of blockchain. If yes, catch it, else create one 
-        AddGenesisBlock();
 
         LastChainSize = Chain.Count;
 
@@ -50,7 +49,17 @@ public class Blockchain : MonoBehaviour
 
     public void InitializeChain()
     {
-        Chain = new List<Block>();
+        if (BlockchainExportImporter.RetrieveChainFromBlockchain() == null)
+        {
+            Chain = new List<Block>();
+            AddGenesisBlock();
+        }
+        else
+        {
+            Chain = BlockchainExportImporter.RetrieveChainFromBlockchain();
+        }
+
+        BlockchainSizeChanged?.Invoke();
     }
 
     public void CreateTransaction(Transaction transaction)
@@ -74,6 +83,7 @@ public class Blockchain : MonoBehaviour
 
     public void AddGenesisBlock()
     {
+        BlockchainExportImporter.InsertBlockIntoBlockchain(CreateGenesisBlock());
         Chain.Add(CreateGenesisBlock());
     }
 

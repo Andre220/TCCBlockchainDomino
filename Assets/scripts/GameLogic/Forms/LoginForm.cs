@@ -19,6 +19,8 @@ public class LoginForm : MonoBehaviour
         };
 
         GlobalConfigInfo.blockchain = new Blockchain();
+        GlobalConfigInfo.dominoAdm = new DominoAdm();
+        GlobalConfigInfo.pecasDoJogo = new DominoPecas();
 
         node.AddComponent<Server>().serverPort = int.Parse(Port.text);
         node.AddComponent<Client>();

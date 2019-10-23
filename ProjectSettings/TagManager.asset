@@ -5,7 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - blockchainUIVisualizer
+  - baralhoUIVisualizer
+  - baralhoPecaInicialUIVisualizer
+  - baralhoPecaJogadorUIVisualizer
+  - baralhoPecaComprarUIVisualizer
   - transactionPoolUIVisualizer
+  - baralhoPecaAdversarioUIVisualizer
   layers:
   - Default
   - TransparentFX

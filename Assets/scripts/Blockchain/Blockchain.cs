@@ -38,6 +38,8 @@ public class Blockchain : MonoBehaviour
 
         var endTimeCreate = DateTime.Now;
 
+        BlockchainExportImporter.InsertBlockIntoBlockchain(block);
+
         Debug.Log($"Duracao = {endTimeCreate - startTimeCreate}");
 
         //Reset transactionPool

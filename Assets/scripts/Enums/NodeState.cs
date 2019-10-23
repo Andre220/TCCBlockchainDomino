@@ -5,6 +5,7 @@ using UnityEngine;
 public enum NodeState
 {
     Logged = 0,
-    Playing = 1,
-    Mining = 2,
+    WaitingForGameData = 1,
+    Playing = 2,
+    Mining = 3,
 }

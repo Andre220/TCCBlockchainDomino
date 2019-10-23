@@ -24,6 +24,12 @@ public static class GlobalConfigInfo
 
     public static Blockchain blockchain;
 
+    public static DominoAdm dominoAdm;
+
+    public static DominoPecas pecasDoJogo;
+
+    public static GameForm gameFormInstance;
+
     public static IClient nodeClient;
     public static IServer nodeServer;
 }

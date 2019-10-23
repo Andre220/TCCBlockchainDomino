@@ -3,7 +3,12 @@ guid: 071855292c395514191c23d11b0622e3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fatherTransform: {instanceID: 0}
+  - transactionPrefab: {fileID: 6516905215400280281, guid: 80deca94346353f4ea975e16b0aab204,
+      type: 3}
+  - ValorA: {instanceID: 0}
+  - ValorB: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

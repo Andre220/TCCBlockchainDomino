@@ -13,4 +13,8 @@ public class UIHelpers : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
+    public void MoveOutsideView(GameObject gameObject)
+    {
+    }
 }

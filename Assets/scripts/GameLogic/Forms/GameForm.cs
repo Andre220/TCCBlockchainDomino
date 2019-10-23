@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,45 +9,65 @@ public class GameForm : MonoBehaviour
     public List<GameObject> FormsToDisable;
     public List<GameObject> FormsToEnable;
 
-    public List<GameObject> Buttons;//Vai se tornar as pecas do player
+    public List<GameObject> PlayerBaralho;//Vai se tornar as pecas do player
 
     public Text MovesCount;
 
     public GameObject TransactionPrefab;
+    public GameObject PecaPrefab;
 
     public Camera mainCamera;
     public Color PlayingBackgroundColor;
 
     void Start()
     {
-        GlobalConfigInfo.nodeServer.ConnectEvent += SetupGamePlay;
-        //GlobalConfigInfo.nodeServer.PlayerMove += gameDataReceived;
-        GlobalConfigInfo.nodeServer.PecaEvent += pecaReceived;
+        GlobalConfigInfo.nodeServer.ConnectEvent += SetupGamePlay; //ativa os objetos e gera o baralho caso o player seja o sender
+        GlobalConfigInfo.nodeServer.PecasDoJogo += pecasDoJogoReceived; // Quando o player recebe as pecas do jogo
+        GlobalConfigInfo.nodeServer.PecaEvent += pecaReceived; // quando o player recebe uma peca
+
+        if (GlobalConfigInfo.gameFormInstance != null)
+        {
+            Destroy(GlobalConfigInfo.gameFormInstance.gameObject);
+            GlobalConfigInfo.gameFormInstance = this;
+        }
+        else
+        {
+            GlobalConfigInfo.gameFormInstance = this;
+        }
+    }
+
+    void Update()
+    {
+        MovesCount.text = GlobalConfigInfo.movesCount.ToString();    
     }
 
     void SetupGamePlay(ConnectionInfo ci)
     {
         GlobalConfigInfo.CurrentAdversary = ci;
 
-        print("Connection ID: " + GlobalConfigInfo.CurrentAdversary.ConnectionID);
-        print("SocketID: " + GlobalConfigInfo.CurrentAdversary.connectedNode.socketID);
-        print("Port: " + GlobalConfigInfo.CurrentAdversary.connectedNode.port);
-        print("Nickname: " + GlobalConfigInfo.CurrentAdversary.connectedNode.nickName);
-
         foreach (GameObject g in FormsToDisable)
         {
-            g.SetActive(false);
+            g?.SetActive(false);
         }
 
         foreach (GameObject g in FormsToEnable)
         {
-            g.SetActive(true);
+            g?.SetActive(true);
         }
-
-        //MovesCount.gameObject?.SetActive(true);
 
         SetupScene();
         SetupPlayingIdentifier();
+
+        if (GlobalConfigInfo.playingIdentifier == PlayingIdentifier.sender)
+        {
+            GlobalConfigInfo.pecasDoJogo = GlobalConfigInfo.dominoAdm.pecas();
+
+            NetworkMessage baralhoDoJogo = new NetworkMessage(DataEvents.PecasDoJogo, GlobalConfigInfo.pecasDoJogo);
+
+            GlobalConfigInfo.nodeClient.SendMessage(baralhoDoJogo, GlobalConfigInfo.CurrentAdversary);
+
+            pecasDoJogoReceived(GlobalConfigInfo.pecasDoJogo);
+        }
     }
 
     void SetupScene()
@@ -62,87 +83,36 @@ public class GameForm : MonoBehaviour
         {
             GlobalConfigInfo.playingIdentifier = PlayingIdentifier.receiver;
         }
-
-        switch (GlobalConfigInfo.playingIdentifier)
-        {
-            case PlayingIdentifier.receiver:
-                Buttons[(int)PlayingIdentifier.receiver].SetActive(true);
-                break;
-
-            case PlayingIdentifier.sender:
-                Buttons[(int)PlayingIdentifier.sender].SetActive(true);
-                break;
-        }
     }
 
-    public void SendMove(int value)
+    void pecasDoJogoReceived(DominoPecas pecas) // esse evento so acontece no player que foi desafiado
     {
-        NetworkMessage message = new NetworkMessage(DataEvents.PlayerMove, value);
-
-        GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
-    }
-
-    public void SendPeca(Peca peca)
-    {
-        NetworkMessage message = new NetworkMessage(DataEvents.PlayerMove, peca);
-
-        GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
-    }
-
-    public void SendCountMove()
-    {
-        if (GlobalConfigInfo.currentPlayerTurn == GlobalConfigInfo.playingIdentifier)
+        if (GlobalConfigInfo.playingIdentifier == PlayingIdentifier.sender) // Isso faz sentido?
         {
-            GlobalConfigInfo.movesCount += 1;
-
-            MovesCount.text = GlobalConfigInfo.movesCount.ToString();
-
-            GlobalConfigInfo.currentPlayerTurn = GlobalConfigInfo.playingIdentifier == PlayingIdentifier.receiver ? PlayingIdentifier.sender : PlayingIdentifier.receiver;
-
-            NetworkMessage message = new NetworkMessage(DataEvents.PlayerMove, GlobalConfigInfo.movesCount);
-            
-            GlobalConfigInfo.nodeClient.SendMessage(message, GlobalConfigInfo.CurrentAdversary);
-
-            if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0)
-            {
-                GameObject instance = Instantiate(TransactionPrefab);
-                instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
-                instance.GetComponent<TransactionViewModel>().StartViewModel();
-            }
+            GenerateBaralho(pecas.playerSenderPecas, TipoPeca.pecaJogador);
         }
-        else
+        else if (GlobalConfigInfo.playingIdentifier == PlayingIdentifier.receiver)
         {
-            print("Não é a sua vez!");
+            GenerateBaralho(pecas.playerReceiverPecas, TipoPeca.pecaJogador);
         }
+
+        GeneratePeca(pecas.pecaInicial, TipoPeca.pecaInicial);
+
+        foreach (Peca p in pecas.pecasParaComprar)
+        {
+            GeneratePeca(p, TipoPeca.pecaComprar);
+        }
+
+        GlobalConfigInfo.dominoAdm.ValorExtremidadeA = pecas.pecaInicial.ValorA;
+        GlobalConfigInfo.dominoAdm.ValorExtremidadeB = pecas.pecaInicial.ValorB;
+
+            //if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0) // o ato de receber as pecas precisa ser transacionado?
+            //{
+            //    GameObject instance = Instantiate(TransactionPrefab);
+            //    instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
+            //    instance.GetComponent<TransactionViewModel>().StartViewModel();
+            //}
     }
-
-    //void gameDataReceived()
-    //{
-    //    GlobalConfigInfo.movesCount += 1;
-
-    //    MovesCount.text = GlobalConfigInfo.movesCount.ToString();
-
-    //    GlobalConfigInfo.currentPlayerTurn = GlobalConfigInfo.playingIdentifier;
-
-    //    if (GlobalConfigInfo.blockchain.TransactionPool.Count != 0)
-    //    {
-    //        GameObject instance = Instantiate(TransactionPrefab);
-    //        instance.GetComponent<TransactionViewModel>().transaction = GlobalConfigInfo.blockchain.TransactionPool[GlobalConfigInfo.blockchain.TransactionPool.Count - 1];
-    //        instance.GetComponent<TransactionViewModel>().StartViewModel();
-    //    }
-
-    //    //TransactionPoolData.text = "";
-
-    //    //foreach (Transaction transaction in GlobalConfigInfo.blockchain.TransactionPool)
-    //    //{
-    //    //    GameObject instance = Instantiate(TransactionPrefab);
-    //    //    instance.GetComponent<TransactionViewModel>().transaction = transaction;
-    //    //    instance.GetComponent<TransactionViewModel>().StartViewModel();
-    //    //    //TransactionPoolData.text += $"From: {transaction.FromAddress}| To: {transaction.ToAddress}| Data: {transaction.Data}";
-    //    //}
-
-    //    Debug.Log("Moves count: " + GlobalConfigInfo.movesCount);
-    //}
 
     void pecaReceived(Peca peca)
     {
@@ -161,7 +131,55 @@ public class GameForm : MonoBehaviour
 
         //Process the UI
 
+        PecaViewModel pvm = Instantiate(PecaPrefab).GetComponent<PecaViewModel>();
+        pvm.peca = peca;
+        pvm.StartViewModel();
+        pvm.fatherTransform = GameObject.FindGameObjectWithTag("baralhoPecaAdversarioUIVisualizer").transform;
+        pvm.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        GlobalConfigInfo.dominoAdm.JogadaValida(pvm);
+
         Debug.Log("Moves count: " + GlobalConfigInfo.movesCount);
         Debug.Log($"A : {peca.ValorA} | B : {peca.ValorB}");
+    }
+
+    public void GenerateBaralho(List<Peca> pecas, TipoPeca tipoDasPecas)
+    {
+        foreach (Peca p in pecas)
+        {
+            GeneratePeca(p, tipoDasPecas);
+        }
+    }
+
+    public void GeneratePeca(Peca p, TipoPeca tipo)
+    {
+        GameObject instance = Instantiate(PecaPrefab);
+        instance.GetComponent<PecaViewModel>().tipoPeca = tipo;
+        instance.GetComponent<PecaViewModel>().peca = p;
+        instance.GetComponent<PecaViewModel>().StartViewModel();
+    }
+
+    public void ShowTransactionsUI(RectTransform transactionUI)
+    {
+        transactionUI.anchoredPosition = new Vector3(0, 0, 0);
+    }
+
+    public void UnshowTransactionsUI(RectTransform transactionUI)
+    {
+        transactionUI.anchoredPosition = new Vector3(400, 0, 0);
+    }
+
+    public void EndGame()
+    {
+        foreach (GameObject g in FormsToDisable)
+        {
+            g?.SetActive(true);
+        }
+
+        foreach (GameObject g in FormsToEnable)
+        {
+            g?.SetActive(false);
+        }
+
+        GlobalConfigInfo.blockchain.ProcessTransactionPool(GlobalConfigInfo.ThisNode.nickName);
     }
 }

@@ -70,8 +70,11 @@
     <Compile Include="Assets\scripts\Blockchain\Models\Block.cs" />
     <Compile Include="Assets\scripts\Blockchain\Models\Transaction.cs" />
     <Compile Include="Assets\scripts\Enums\DataEvents.cs" />
+    <Compile Include="Assets\scripts\Enums\JogadaResultado.cs" />
     <Compile Include="Assets\scripts\Enums\NodeState.cs" />
     <Compile Include="Assets\scripts\Enums\PlayingIdentifier.cs" />
+    <Compile Include="Assets\scripts\Enums\TipoPeca.cs" />
+    <Compile Include="Assets\scripts\GameLogic\DominoAdm.cs" />
     <Compile Include="Assets\scripts\GameLogic\Forms\BlockchainVisualizer.cs" />
     <Compile Include="Assets\scripts\GameLogic\Forms\ConnectionForm.cs" />
     <Compile Include="Assets\scripts\GameLogic\Forms\GameForm.cs" />

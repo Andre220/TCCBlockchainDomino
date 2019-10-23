@@ -16,6 +16,8 @@ public class Server : MonoBehaviour, IServer
     
     public event Action<Peca> PecaEvent;
 
+    public event Action<DominoPecas> PecasDoJogo;
+    
     public event Action PlayRequest;
 
     public event Action Syncronizantion;
@@ -149,6 +151,20 @@ public class Server : MonoBehaviour, IServer
             case DataEvents.PlayRequest: // if connection response is ok, continue. Else, disconnect from node.
                 PlayRequest?.Invoke();
                 break;
+
+            case DataEvents.PecasDoJogo: // if connection response is ok, continue. Else, disconnect from node.
+                try
+                {
+                    DominoPecas dominoPecas = JsonConvert.DeserializeObject<DominoPecas>(message.Message.ToString());
+                    GlobalConfigInfo.blockchain.CreateTransaction(GlobalConfigInfo.CurrentAdversary.connectedNode.nickName, GlobalConfigInfo.ThisNode.nickName, dominoPecas);
+                    PecasDoJogo?.Invoke(dominoPecas);
+                }
+                catch (Exception e)
+                {
+                    string exc = e.ToString();
+                }
+                break;
+
             case DataEvents.PlayerMove: // call event to deal with this event and every gameplay script who sould know about network info should do your action
                 try
                 {

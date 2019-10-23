@@ -31,7 +31,7 @@ public class BlockchainExportImporter : MonoBehaviour
         return JsonConvert.DeserializeObject<Block>(blockchainJson);
     }
 
-    public static IList<Block> RetrieveChainFromBlockchain()
+    public static List<Block> RetrieveChainFromBlockchain()
     {
         string blockchainJson = "";
 

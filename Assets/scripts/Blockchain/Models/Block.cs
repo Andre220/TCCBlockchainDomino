@@ -8,6 +8,7 @@ using UnityEngine;
 
 //Lembre-se: Os blocos são um conjunto de transações
 //Esse script é responsável também pela mineração
+[Serializable]
 public class Block
 {
     public int Index { get; set; }
@@ -17,12 +18,21 @@ public class Block
     public IList<Transaction> Transactions { get; set; }
     public int nonce { get; set; } = 0;
 
-    public Block(DateTime timeStamp, string previousHash, IList<Transaction> transaction)
+    public Block(DateTime timeStamp, string previousHash, List<Transaction> transaction)
     {
         Index = 0;
         TimeStamp = timeStamp;
         PreviousBlockHash = previousHash;
-        Transactions = transaction;
+
+        if (transaction == null)
+        {
+            Transactions = null;
+        }
+        else
+        {
+            Transactions = transaction;
+        }
+
         BlockHash = CalculateHash();
     }
 

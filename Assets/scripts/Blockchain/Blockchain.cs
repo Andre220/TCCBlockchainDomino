@@ -10,8 +10,8 @@ public class Blockchain : MonoBehaviour
     public int Difficcult { get; set; } = 2;
     public int Reward { get; set; } = 1; //Reward to the miner who manage to mine the block
 
-    public IList<Transaction> TransactionPool = new List<Transaction>();
-    public IList<Block> Chain { get; set; }
+    public List<Transaction> TransactionPool = new List<Transaction>();
+    public List<Block> Chain { get; set; }
 
     public int LastChainSize;
     public int LastPoolSize;
@@ -24,6 +24,21 @@ public class Blockchain : MonoBehaviour
 
         BlockchainSizeChanged += OnChainSizeChanged;
         TransactionPoolSizeChanged += OnTransactionPoolSizeChanged;
+    }
+
+    public void InitializeChain()
+    {
+        if (BlockchainExportImporter.RetrieveChainFromBlockchain() == null)
+        {
+            Chain = new List<Block>();
+            AddGenesisBlock();
+        }
+        else
+        {
+            Chain = BlockchainExportImporter.RetrieveChainFromBlockchain();
+        }
+
+        BlockchainSizeChanged?.Invoke();
     }
 
     public void ProcessTransactionPool(string minerAddress)
@@ -47,21 +62,6 @@ public class Blockchain : MonoBehaviour
 
         //Premiando o minerador
         CreateTransaction(new Transaction("blockChainInstance", minerAddress, Reward));
-    }
-
-    public void InitializeChain()
-    {
-        if (BlockchainExportImporter.RetrieveChainFromBlockchain() == null)
-        {
-            Chain = new List<Block>();
-            AddGenesisBlock();
-        }
-        else
-        {
-            Chain = BlockchainExportImporter.RetrieveChainFromBlockchain();
-        }
-
-        BlockchainSizeChanged?.Invoke();
     }
 
     public void CreateTransaction(Transaction transaction)

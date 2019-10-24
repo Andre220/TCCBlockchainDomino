@@ -15,6 +15,13 @@ public class BlockchainVisualizer : MonoBehaviour
 
     void AddBlocksToUI()
     {
+        Transform parent = GameObject.FindGameObjectWithTag("blockchainUIVisualizer").transform;
+
+        foreach (Transform t in parent)
+        {
+            Destroy(t.gameObject);
+        }
+
         foreach (Block b in GlobalConfigInfo.blockchain.Chain)
         {
             GameObject instance = Instantiate(blockViewModelPrefab);

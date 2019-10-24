@@ -22,6 +22,8 @@ public class Server : MonoBehaviour, IServer
 
     public event Action Syncronizantion;
 
+    public event Action EndGame;
+
     //public event Action<DominoPecas, int, NodeInfo> StartPlay;
 
     public event Action<int> DisconnectEvent;
@@ -179,6 +181,9 @@ public class Server : MonoBehaviour, IServer
 
                 //PlayerMove?.Invoke();
 
+                break;
+            case DataEvents.EndGame: // call event to deal with this event and every gameplay script who sould know about network info should do your action
+                EndGame?.Invoke();
                 break;
         }
 

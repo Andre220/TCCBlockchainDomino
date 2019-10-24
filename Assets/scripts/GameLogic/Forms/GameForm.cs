@@ -18,12 +18,16 @@ public class GameForm : MonoBehaviour
 
     public Camera mainCamera;
     public Color PlayingBackgroundColor;
+    public Color LobbyBackgroundColor;
 
     void Start()
     {
+        LobbyBackgroundColor = mainCamera.backgroundColor;
+
         GlobalConfigInfo.nodeServer.ConnectEvent += SetupGamePlay; //ativa os objetos e gera o baralho caso o player seja o sender
         GlobalConfigInfo.nodeServer.PecasDoJogo += pecasDoJogoReceived; // Quando o player recebe as pecas do jogo
         GlobalConfigInfo.nodeServer.PecaEvent += pecaReceived; // quando o player recebe uma peca
+        GlobalConfigInfo.nodeServer.EndGame += EndGameConfig; // quando o player recebe uma peca
 
         if (GlobalConfigInfo.gameFormInstance != null)
         {
@@ -170,9 +174,25 @@ public class GameForm : MonoBehaviour
 
     public void EndGame()
     {
+        EndGameConfig();
+
+        GlobalConfigInfo.blockchain.ProcessTransactionPool(GlobalConfigInfo.ThisNode.nickName);
+
+        NetworkMessage engaGameMessage = new NetworkMessage(DataEvents.EndGame, GlobalConfigInfo.ThisNode.nickName);
+
+        GlobalConfigInfo.nodeClient.SendMessage(engaGameMessage, GlobalConfigInfo.CurrentAdversary);
+
+        GlobalConfigInfo.CurrentAdversary = null;
+    }
+
+    public void EndGameConfig()
+    {
+        mainCamera.backgroundColor = PlayingBackgroundColor;
+
         foreach (GameObject g in FormsToDisable)
         {
-            g?.SetActive(true);
+            if (g.name != "(Form)Login")
+                g?.SetActive(true);
         }
 
         foreach (GameObject g in FormsToEnable)
@@ -180,6 +200,7 @@ public class GameForm : MonoBehaviour
             g?.SetActive(false);
         }
 
-        GlobalConfigInfo.blockchain.ProcessTransactionPool(GlobalConfigInfo.ThisNode.nickName);
+        GlobalConfigInfo.MyTurn = false;
+        GlobalConfigInfo.movesCount = 0;
     }
 }

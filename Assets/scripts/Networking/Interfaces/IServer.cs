@@ -13,6 +13,7 @@ public interface IServer
     event Action<DominoPecas> PecasDoJogo;
     event Action PlayRequest;
     event Action Syncronizantion;
+    event Action EndGame;
     event Action<int> DisconnectEvent;
 
     void OnConnectEvent(int socketID, int connectionId, NetworkError error);

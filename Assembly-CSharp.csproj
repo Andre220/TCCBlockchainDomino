@@ -64,8 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\Blockchain\Blockchain.cs" />
-    <Compile Include="Assets\scripts\Blockchain\BlockchainForm.cs" />
-    <Compile Include="Assets\scripts\Blockchain\BlockchainInstancer.cs" />
     <Compile Include="Assets\scripts\Blockchain\Helpers\BlockchainExportImporter.cs" />
     <Compile Include="Assets\scripts\Blockchain\Models\Block.cs" />
     <Compile Include="Assets\scripts\Blockchain\Models\Transaction.cs" />
@@ -94,6 +92,7 @@
     <Compile Include="Assets\scripts\Networking\Models\NodeInfo.cs" />
     <Compile Include="Assets\scripts\Networking\Server.cs" />
     <None Include="Assets\Resources\blockchainJson.txt" />
+    <None Include="Assets\NetworkDomino.cd" />
     <None Include="Assets\JsonDotNet\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Usuarios/André/PROJETOS/Unity/TCCBlockchainDomino/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

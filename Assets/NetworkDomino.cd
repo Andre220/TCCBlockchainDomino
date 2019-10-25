@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Client">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="0.75" />
+        <Point X="5.5" Y="0.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAiAAACAgEAAAACEQAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Client.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="Server">
+    <Position X="6" Y="3.5" Width="5.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="1.062" />
+        <Point X="7" Y="1.062" />
+        <Point X="7" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="KnowNodes" Type="ConnectionInfo" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.625" Y="3.5" />
+        <Point X="7.625" Y="2.562" />
+        <Point X="11" Y="2.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAQAIIACAAGEEBAAEQAAgggAAAAAAAAKQDAgAQAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Server.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="KnowNodes" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConnectionInfo">
+    <Position X="11" Y="2" Width="2.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.812" Y="1.191" />
+        <Point X="12.812" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="connectedNode" Type="NodeInfo" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.812" Y="3.233" />
+        <Point X="11.812" Y="3.491" />
+        <Point X="11.812" Y="3.491" />
+        <Point X="11.812" Y="3.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.304" Y="0.069" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\scripts\Networking\Models\ConnectionInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="connectedNode" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NetworkMessage">
+    <Position X="9.25" Y="9.75" Width="4" />
+    <AssociationLine Name="Sender" Type="NodeInfo" FixedToPoint="true">
+      <Path>
+        <Point X="12.375" Y="9.75" />
+        <Point X="12.375" Y="5.238" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Models\NetworkMessage.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Sender" />
+      <Field Name="MessageType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NodeInfo">
+    <Position X="11.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Models\NodeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="IClient">
+    <Position X="0.5" Y="4" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAgAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Interfaces\IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IServer">
+    <Position X="0.5" Y="5.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAIAAAAACAEBAAAAAAAgAAAAAAAAAKQDAAAQAAA=</HashCode>
+      <FileName>Assets\scripts\Networking\Interfaces\IServer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DataEvents">
+    <Position X="6" Y="9.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAACQAQAAQAAA=</HashCode>
+      <FileName>Assets\scripts\Enums\DataEvents.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -8,30 +8,7 @@ using System;
 
 public class BlockchainExportImporter : MonoBehaviour
 {
-
-    //static string path = Application.dataPath + "Assets/Resources/blockchainJson.txt";
-
-    public static Block RetrieveBlockFromBlockchain()
-    {
-        string blockchainJson = "";
-
-        try
-        {
-            using (StreamReader sr = File.OpenText(getPath()))
-            {
-                blockchainJson = sr.ReadToEnd();
-            }
-        }
-        catch (Exception)
-        {
-            return null;
-        }
-
-
-        return JsonConvert.DeserializeObject<Block>(blockchainJson);
-    }
-
-    public static List<Block> RetrieveChainFromBlockchain()
+    public static List<Block> RetrieveChainFromBlockchainFile()
     {
         string blockchainJson = "";
 
@@ -55,17 +32,17 @@ public class BlockchainExportImporter : MonoBehaviour
         return JsonConvert.DeserializeObject<List<Block>>(blockchainJson);
     }
 
-    public static void InsertBlockIntoBlockchain(Block block)
+    public static void InsertBlockIntoBlockchainFile(Block block)
     {
         IList<Block> blockchain;
 
-        if (RetrieveChainFromBlockchain() == null)
+        if (RetrieveChainFromBlockchainFile() == null)
         {
             blockchain = new List<Block>();
         }
         else
         {
-            blockchain = RetrieveChainFromBlockchain();
+            blockchain = RetrieveChainFromBlockchainFile();
         }
 
         blockchain.Add(block);

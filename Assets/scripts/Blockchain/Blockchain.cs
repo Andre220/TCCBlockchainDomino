@@ -28,14 +28,14 @@ public class Blockchain : MonoBehaviour
 
     public void InitializeChain()
     {
-        if (BlockchainExportImporter.RetrieveChainFromBlockchain() == null)
+        if (BlockchainExportImporter.RetrieveChainFromBlockchainFile() == null)
         {
             Chain = new List<Block>();
             AddGenesisBlock();
         }
         else
         {
-            Chain = BlockchainExportImporter.RetrieveChainFromBlockchain();
+            Chain = BlockchainExportImporter.RetrieveChainFromBlockchainFile();
         }
 
         BlockchainSizeChanged?.Invoke();
@@ -53,7 +53,7 @@ public class Blockchain : MonoBehaviour
 
         var endTimeCreate = DateTime.Now;
 
-        BlockchainExportImporter.InsertBlockIntoBlockchain(block);
+        BlockchainExportImporter.InsertBlockIntoBlockchainFile(block);
 
         Debug.Log($"Duracao = {endTimeCreate - startTimeCreate}");
 
@@ -85,7 +85,7 @@ public class Blockchain : MonoBehaviour
 
     public void AddGenesisBlock()
     {
-        BlockchainExportImporter.InsertBlockIntoBlockchain(CreateGenesisBlock());
+        BlockchainExportImporter.InsertBlockIntoBlockchainFile(CreateGenesisBlock());
         Chain.Add(CreateGenesisBlock());
     }
 

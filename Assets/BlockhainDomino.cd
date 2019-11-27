@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BlockchainExportImporter">
+    <Position X="7.75" Y="6.5" Width="3.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.875" Y="1.191" />
+        <Point X="10.875" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Helpers\BlockchainExportImporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Block">
+    <Position X="1.5" Y="6.75" Width="5.25" />
+    <AssociationLine Name="Transactions" Type="Transaction" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="7.062" />
+        <Point X="7.312" Y="7.062" />
+        <Point X="7.312" Y="5.824" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.268" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAKIAACRAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Models\Block.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Transactions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Transaction">
+    <Position X="6.5" Y="3.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAEAAAABAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Models\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blockchain">
+    <Position X="1.5" Y="0.5" Width="4" />
+    <AssociationLine Name="TransactionPool" Type="Transaction" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="2.875" />
+        <Point X="7.312" Y="2.875" />
+        <Point X="7.312" Y="3.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.406" Y="0.124" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BIAAACgAAAABAAAAAAggAwiZACAAAAgAAAAAAAAIgYA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Blockchain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="TransactionPool" />
+      <Property Name="Chain" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

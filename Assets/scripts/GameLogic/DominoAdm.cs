@@ -113,6 +113,7 @@ public class DominoAdm
     public bool JogadaValida(PecaViewModel p)
     {
         RectTransform rect = p.GetComponent<RectTransform>();
+
         if (p.peca.ValorA == ValorExtremidadeA)
         {
             p.transform.SetParent(posicaoExtremidadeA);

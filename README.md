@@ -61,5 +61,5 @@ Entretanto, mais pesquisas na área são necessárias antes que seja possível a
   1. André Felipe dos Santos (Desenvolvedor)
 
   #### Links:
-  1. [Versão final da parte escrita](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/(TCC)DESENVOLVIMENTO%20DE%20JOGO%20DIGITAL%20USANDO%20BLOCKCHAIN.pdf)
+  1. [Versão final da parte escrita](https://drive.google.com/file/d/1esuhM6GoZV3GJIRjhBi159EF-h4V8inh/view?usp=sharing)
   2. [BuildA e BuildB da aplicação](https://github.com/Andre220/TCCBlockchainDomino/tree/master/Build)

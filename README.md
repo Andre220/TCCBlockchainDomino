@@ -30,16 +30,16 @@ Entretanto, mais pesquisas na área são necessárias antes que seja possível a
   1. Para facilitar a testagem, efeutei dois builds, localizados no diretório "TCCBlockchainDomino\Build\BuildA" e "TCCBlockchainDomino\Build\BuildB".
   2. Entrar no diretório de cada build e executar o arquivo "TCCDomino" em cada um, abrindo **DUAS** intâncias do jogo.
   3. Em uma instância, preencher o campo **porta** e **nickname** como na imagem *3.1*: </br>
-  - 3.1 ![Campos de login preenchidos]()
+  - 3.1 ![Campos de login preenchidos](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/1-Login.png)
   4. Repetir o processo 3 na outra instância aberta, lembrando que o campo **porta** precisa ter um valor diferente em cada instância.
   5. Na tela principal (imagem *5.1*) basta inserir a porta do adversário que o jogo se inicia em ambos os clientes.
   Repare que no display ao lado direito, ao se arrastar para baixo algumas vezes, é possível ver as informações do bloco gênesis:</br>
-  - 5.1 ![Preenchimento da porta do adversário]()
+  - 5.1 ![Preenchimento da porta do adversário](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/2-TelaPrincipal.png)
   6. Na tela de jogo (imagem *6.1*), ao se clicar no botão "transações", um display é exibido com todas as transações (jogadas) feitas na partida (imagem *6.2*):</br>
-  - 6.1 ![Tela de jogo]()
-  - 6.2 ![Tela de transações]()
+  - 6.1 ![Tela de jogo](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/3-GamePlay.png)
+  - 6.2 ![Tela de transações](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/4-GamePlayTransacoes.png)
   7. Quando um dos clientes clica no botão "EndGame", ele minera o bloco com as transações feitas durante partida e é direcionado para a tela principal, como exibido na imagem *7.1*: </br>
-  - 7.1 ![Após minerar o bloco]()
+  - 7.1 ![Após minerar o bloco](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/5-TelaPrincipalBlocos.png)
 
   #### Bugs conhecidos:
   1. Durante a partida de dominó, no menu que exibe as transações, as informações de cada transação expecífica não são exibidas na lista.
@@ -61,5 +61,5 @@ Entretanto, mais pesquisas na área são necessárias antes que seja possível a
   1. André Felipe dos Santos (Desenvolvedor)
 
   #### Links:
-  1. [Versão final da parte escrita]()
-  2. [Build da aplicação]()
+  1. [Versão final da parte escrita](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/(TCC)DESENVOLVIMENTO%20DE%20JOGO%20DIGITAL%20USANDO%20BLOCKCHAIN.pdf)
+  2. [BuildA e BuildB da aplicação](https://github.com/Andre220/TCCBlockchainDomino/tree/master/Build)

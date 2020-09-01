@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="DominoPecas">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <AssociationLine Name="pecaInicial" Type="Peca" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="5.75" />
+        <Point X="4.25" Y="5.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="0.026" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="pecasParaComprar" Type="Peca" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.938" Y="5.868" />
+        <Point X="0.938" Y="6.125" />
+        <Point X="4.25" Y="6.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="playerReceiverPecas" Type="Peca" FixedFromPoint="true">
+      <Path>
+        <Point X="2" Y="5.125" />
+        <Point X="4.25" Y="5.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="playerSenderPecas" Type="Peca" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="5.438" />
+        <Point X="3.125" Y="5.438" />
+        <Point X="3.125" Y="5.438" />
+        <Point X="4.25" Y="5.438" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.149" Y="0.082" Height="0.182" Width="2.096" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAgAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\Models\DominoPecas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pecaInicial" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="pecasParaComprar" />
+      <Field Name="playerReceiverPecas" />
+      <Field Name="playerSenderPecas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Peca">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\Models\Peca.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockViewModel">
+    <Position X="4.75" Y="1.5" Width="2.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.438" Y="1.191" />
+        <Point X="5.438" Y="1.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="block" Type="Block" FixedFromPoint="true">
+      <Path>
+        <Point X="6.812" Y="3.954" />
+        <Point X="6.812" Y="6.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.699" Y="0.073" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAEAQAAAAIAAAAAVAA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\ViewModels\BlockViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="block" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PecaViewModel">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="0.687" />
+        <Point X="2.75" Y="0.687" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="peca" Type="Peca" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.625" />
+        <Point X="4.5" Y="1.625" />
+        <Point X="4.5" Y="5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.699" Y="0.047" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAEAEAAAAAQAAAAAAAAAAFAA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\ViewModels\PecaViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="tipoPeca" />
+      <Field Name="peca" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TransactionViewModel">
+    <Position X="8.25" Y="0.5" Width="2.25" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedFromPoint="true">
+      <Path>
+        <Point X="6.25" Y="0.688" />
+        <Point X="8.25" Y="0.688" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="transaction" Type="Transaction" FixedToPoint="true">
+      <Path>
+        <Point X="10.375" Y="2.954" />
+        <Point X="10.375" Y="3.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAEAAAAAQAAAAAAgAAA0AA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\ViewModels\TransactionViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="transaction" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DominoAdm">
+    <Position X="2.25" Y="6.75" Width="3.75" />
+    <AssociationLine Name="pecasGeradas" Type="Peca" FixedFromPoint="true">
+      <Path>
+        <Point X="5.188" Y="6.75" />
+        <Point X="5.188" Y="6.296" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.115" Y="0.152" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAgAQAEAQAAgAAAAAAACAAAAAAAAAgQAAAgAAADAAA=</HashCode>
+      <FileName>Assets\scripts\GameLogic\DominoAdm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="pecasGeradas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Block">
+    <Position X="6.5" Y="6.75" Width="4" />
+    <AssociationLine Name="Transactions" Type="Transaction" FixedFromPoint="true">
+      <Path>
+        <Point X="10.375" Y="6.75" />
+        <Point X="10.375" Y="6.074" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAKIAACRAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Models\Block.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Transactions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Transaction">
+    <Position X="7.25" Y="3.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAEAAAABAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Blockchain\Models\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="TipoPeca">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAQAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\scripts\Enums\TipoPeca.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

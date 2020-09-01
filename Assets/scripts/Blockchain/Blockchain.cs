@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blockchain : MonoBehaviour
+public class Blockchain
 {
     public Action BlockchainSizeChanged;
     public Action TransactionPoolSizeChanged;
@@ -137,13 +137,13 @@ public class Blockchain : MonoBehaviour
 
     public void OnChainSizeChanged()
     {
-        print($"Chain changed from {LastChainSize} to {Chain.Count}");
+        UnityEngine.Debug.Log($"Chain changed from {LastChainSize} to {Chain.Count}");
         LastChainSize = Chain.Count;
     }
 
     public void OnTransactionPoolSizeChanged()
     {
-        print($"Transaction Pool changed from {LastPoolSize} to {TransactionPool.Count}");
+        UnityEngine.Debug.Log($"Transaction Pool changed from {LastPoolSize} to {TransactionPool.Count}");
         LastPoolSize = TransactionPool.Count;
     }
 }

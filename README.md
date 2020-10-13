@@ -27,7 +27,7 @@ Entretanto, mais pesquisas na área são necessárias antes que seja possível a
   3. Unet
   
   #### Orientações para testar a aplicação:
-  1. Para facilitar a testagem, efeutei dois builds, localizados no diretório "TCCBlockchainDomino\Build\BuildA" e "TCCBlockchainDomino\Build\BuildB".
+  1. Para facilitar a testagem, efetuei duas builds, localizadas no diretório "TCCBlockchainDomino\Build\BuildA" e "TCCBlockchainDomino\Build\BuildB".
   2. Entrar no diretório de cada build e executar o arquivo "TCCDomino" em cada um, abrindo **DUAS** intâncias do jogo.
   3. Em uma instância, preencher o campo **porta** e **nickname** como na imagem *3.1*: </br>
   - 3.1 ![Campos de login preenchidos](https://github.com/Andre220/TCCBlockchainDomino/blob/master/Documentação/Imagens/1-Login.png)
